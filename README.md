@@ -8,7 +8,9 @@ Tables that list and describe gcc and linker flags that deal with protection mec
 | ------------ | ------------ |
 | `-fno-stack-protector` | Canary is disabled |
 | `-fstack-protector` | Canary is enabled for functions with potential vulnerable objects (default) | 
-| `-fstack-protector-all` | Canary is enabled for all functions|
+| `-fstack-protector-all` | Canary is enabled for all functions |
+
+[Canary Reference](https://ctf-wiki.github.io/ctf-wiki/pwn/linux/mitigation/canary/)
 
 ### NX
 
