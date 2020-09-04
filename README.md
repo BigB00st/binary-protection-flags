@@ -1,4 +1,4 @@
-# Protection Mechanisms Cheat Sheet
+# Binary Protection Flags
 Tables that list and describe gcc and linker flags that deal with protection mechanisms of linux binaries.
 
 
