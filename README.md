@@ -2,37 +2,62 @@
 Tables that list and describe gcc and linker flags that deal with protection mechanisms of linux binaries.
 
 
-### Stack Protection (Canary)
+### Canary
 
 | Flag | Description | 
 | ------------ | ------------ |
-| -fno-stack-protector | Canary is disabled |
-| -fstack-protector | Canary is enabled for functions with potential vulnerable objects (default) | 
-| -fstack-protector-all | Canary is enabled for all functions|
+| `-fno-stack-protector` | Canary is disabled |
+| `-fstack-protector` | Canary is enabled for functions with potential vulnerable objects (default) | 
+| `-fstack-protector-all` | Canary is enabled for all functions|
 
-### Data Execution Prevention
-
-|  Flag |  Description  |
-| ------------ | ------------ |
-| -z noexecstack | data is not executable (default) |
-| -z execstack | Disable NX, data is executable |
-
-
-### Position Independent Executable
+### NX
 
 |  Flag |  Description  |
 | ------------ | ------------ |
-|  -no-pie |  Binary will **not** be **P**osition **I**ndependent **E**xecutable |
-| -pie | Binary will be **P**osition **I**ndependent **E**xecutable (default) |
+| `-z noexecstack` | Data is not executable (default) |
+| `-z execstack` | Disable NX, data is executable |
+
+
+### PIE
+
+|  Flag |  Description  |
+| ------------ | ------------ |
+| `-no-pie` |  Binary will **not** be **P**osition **I**ndependent **E**xecutable |
+| `-pie` | Binary will be **P**osition **I**ndependent **E**xecutable (default) |
+
+[PIE Reference](https://access.redhat.com/blogs/766093/posts/1975793)
 
 ### RELRO
 
 |  Flag |  Description  |
 | ------------ | ------------ |
-|  -Wl,-z,norelro |  Relocation read-only will be disabled |
-| -Wl,-z,relro | Partial RELRO, forces the GOT to come before the BSS in memory (default) |
-| -Wl,-z,relro,-z,now | Full Relro, GOT will be read-only |
+| `-Wl,-z,norelro` |  Relocation read-only will be disabled |
+| `-Wl,-z,relro` | Partial RELRO, forces the GOT to come before the BSS in memory (default) |
+| `-Wl,-z,relro,-z,now` | Full Relro, GOT will be read-only |
 
+[RELRO Reference](https://www.redhat.com/en/blog/hardening-elf-binaries-using-relocation-read-only-relro)
+
+### Fortify
+|  Flag |  Description  |
+| ------------ | ------------ |
+| `-D_FORTIFY_SOURCE=1 -O1` | Disabled (default) |
+| `-D_FORTIFY_SOURCE=2 -O2` | Enabled, perform extra checks when employing various string and memory manipulation functions |
+
+Note: `-O<n>` sets compiler optimization level <n>.
+  
+[Fortify Reference](https://access.redhat.com/blogs/766093/posts/1976213)
+
+### ASLR
+This is not a flag, but I decided to place this here either way. The commands below set ASLR for the entire system.
+
+**Enable:**
+```
+echo 2 | sudo tee /proc/sys/kernel/randomize_va_space
+```
+**Disable:**
+```
+echo 0 | sudo tee /proc/sys/kernel/randomize_va_space
+```
 
 ### Note
 Flags passed with `-z`, are sent directly to the linker.
