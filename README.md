@@ -33,19 +33,20 @@ Tables that list and describe gcc and linker flags that deal with protection mec
 
 |  Flag |  Description  |
 | ------------ | ------------ |
-| `-Wl,-z,norelro` |  Relocation read-only will be disabled |
+| `-Wl,-z,norelro` |  **Rel**ocation **r**ead-**o**nly will be disabled |
 | `-Wl,-z,relro` | Partial RELRO, forces the GOT to come before the BSS in memory (default) |
-| `-Wl,-z,relro,-z,now` | Full Relro, GOT will be read-only |
+| `-Wl,-z,relro,-z,now` | Full RELRO, GOT will be read-only |
 
 [RELRO Reference](https://www.redhat.com/en/blog/hardening-elf-binaries-using-relocation-read-only-relro)
 
 ### Fortify
 |  Flag |  Description  |
 | ------------ | ------------ |
-| `-D_FORTIFY_SOURCE=1 -O1` | Disabled (default) |
-| `-D_FORTIFY_SOURCE=2 -O2` | Enabled, perform extra checks when employing various string and memory manipulation functions |
+| `-D_FORTIFY_SOURCE=0 -O0` | Disabled (default) |
+| `-D_FORTIFY_SOURCE=1 -O1` | Perform checks on string and memory manipulation functions at compile time |
+| `-D_FORTIFY_SOURCE=2 -O2` | Enabled, perform extra checks when employing various string and memory manipulation functions at run time |
 
-Note: `-O<n>` sets compiler optimization level <n>.
+Note: `-On` sets compiler optimization level **n**.
   
 [Fortify Reference](https://access.redhat.com/blogs/766093/posts/1976213)
 
@@ -61,8 +62,9 @@ echo 2 | sudo tee /proc/sys/kernel/randomize_va_space
 echo 0 | sudo tee /proc/sys/kernel/randomize_va_space
 ```
 
-### Note
-Flags passed with `-z`, are sent directly to the linker.
+### Notes
+ * Use [checksec](https://github.com/slimm609/checksec.sh) to view the protections of an existing binary.
+ * Flags passed with `-z`, are sent directly to the linker.
 
 ### Examples:
 Compile binary with **NX** disabled:
