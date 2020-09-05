@@ -64,7 +64,7 @@ echo 0 | sudo tee /proc/sys/kernel/randomize_va_space
 
 ### Notes
  * Use [checksec](https://github.com/slimm609/checksec.sh) to view the protections of an existing binary.
- * Flags passed with `-z`, are sent directly to the linker.
+ * Flags passed with `-Wl` and `-z`, are sent directly to the linker.
 
 ### Examples:
 Compile binary with **NX** disabled:
