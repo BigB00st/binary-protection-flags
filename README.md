@@ -43,8 +43,8 @@ Tables that list and describe gcc and linker flags that deal with protection mec
 |  Flag |  Description  |
 | ------------ | ------------ |
 | `-D_FORTIFY_SOURCE=0 -O0` | Disabled (default) |
-| `-D_FORTIFY_SOURCE=1 -O1` | Perform checks on string and memory manipulation functions at compile time |
-| `-D_FORTIFY_SOURCE=2 -O2` | Enabled, perform extra checks when employing various string and memory manipulation functions at run time |
+| `-D_FORTIFY_SOURCE=1 -O1` | Perform checks on string and memory manipulation functions at **compile time** |
+| `-D_FORTIFY_SOURCE=2 -O2` | Perform extra checks when employing various string and memory manipulation functions at **run time** |
 
 Note: `-On` sets compiler optimization level **n**.
   
